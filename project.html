@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Projects – ITZFIZZ</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+ background:linear-gradient(135deg,#05001a,#4e00ff,#d100ff,#00eaff,#1300ff);
+ background-size:500%;
+ animation:bgflow 20s infinite alternate ease-in-out;
+ color:white;overflow-x:hidden;
+}
+@keyframes bgflow{
+ 0%{background-position:0 50%;}
+ 50%{background-position:100% 50%;}
+ 100%{background-position:0 50%;}
+}
+
+/* NAV */
+nav{
+ position:fixed;top:0;width:100%;
+ display:flex;justify-content:space-between;align-items:center;
+ padding:15px 25px;background:rgba(255,255,255,0.1);
+ backdrop-filter:blur(10px);z-index:999;
+}
+nav a{color:cyan;margin:0 15px;text-decoration:none;font-weight:600;}
+nav h2{color:#00eaff;font-size:25px;font-weight:900;}
+
+/* HEADER */
+header{
+ height:45vh;display:flex;justify-content:center;
+ align-items:center;text-align:center;padding-top:80px;
+}
+header h1{
+ font-size:50px;font-weight:900;text-shadow:0 0 25px cyan;
+ opacity:0;
+}
+header p{opacity:0;margin-top:10px;font-size:18px;}
+
+/* FILTER BUTTONS */
+.filters{
+ text-align:center;margin:20px 0;
+}
+.filters button{
+ padding:10px 20px;margin:7px;border:none;border-radius:25px;
+ background:#00eaff;color:black;font-weight:700;
+ box-shadow:0 0 15px #00ffff;cursor:pointer;transition:0.3s;
+}
+.filters button:hover{transform:scale(1.1);}
+.filters button.active{
+ background:white;color:black;
+}
+
+/* PROJECT GRID */
+.projects{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+ gap:25px;padding:20px 30px;
+}
+.project-card{
+ background:rgba(255,255,255,0.1);
+ padding:25px;border-radius:18px;
+ box-shadow:0 0 25px rgba(255,255,255,0.1);
+ backdrop-filter:blur(12px);
+ opacity:0;transform:translateY(40px);
+ border:1px solid rgba(255,255,255,0.15);
+ transition:0.3s;
+}
+.project-card:hover{
+ transform:scale(1.06);
+ box-shadow:0 0 30px rgba(0,255,255,0.5);
+}
+.project-card h3{
+ margin:10px 0;color:#00eaff;font-size:23px;
+}
+.project-card p{opacity:.85;font-size:15px;}
+
+/* CASE STUDIES */
+.case-studies{
+ padding:60px 30px;margin-top:40px;
+}
+.case-studies h2{
+ text-align:center;font-size:40px;font-weight:900;
+ text-shadow:0 0 20px white;margin-bottom:30px;
+}
+.case-box{
+ background:rgba(255,255,255,0.07);
+ padding:25px;margin:20px auto;border-radius:15px;
+ max-width:850px;box-shadow:0 0 20px rgba(255,255,255,0.2);
+ opacity:0;transform:translateY(40px);
+}
+.case-box h3{color:#00eaff;font-size:25px;margin-bottom:10px;}
+.case-box p{opacity:0.9;font-size:16px;}
+
+/* TECH SLIDER */
+.tech-slider{
+ margin-top:60px;text-align:center;
+}
+.tech-slider h2{
+ font-size:35px;font-weight:900;text-shadow:0 0 15px cyan;
+}
+.tech-logos{
+ white-space:nowrap;overflow:hidden;margin-top:30px;
+}
+.tech-logos img{
+ height:60px;margin:0 25px;filter:drop-shadow(0 0 15px cyan);
+ animation:slide 12s linear infinite;
+}
+@keyframes slide{
+ from{transform:translateX(100%);}
+ to{transform:translateX(-100%);}
+}
+
+/* WHY CHOOSE US */
+.why{
+ padding:60px 30px;margin-top:50px;
+ background:rgba(0,0,0,0.3);
+}
+.why h2{
+ text-align:center;font-size:35px;font-weight:900;
+ text-shadow:0 0 15px pink;margin-bottom:25px;
+}
+.features{
+ display:grid;gap:20px;
+ grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+}
+.feature-box{
+ background:rgba(255,255,255,0.08);
+ padding:20px;border-radius:20px;text-align:center;
+ box-shadow:0 0 20px rgba(255,255,255,0.2);
+ opacity:0;transform:translateY(40px);
+}
+.feature-box i{
+ font-size:40px;color:#00eaff;margin-bottom:10px;
+}
+
+/* FOOTER */
+footer{
+ padding:40px;text-align:center;margin-top:70px;
+ background:rgba(255,255,255,0.12);
+}
+footer i{margin:0 12px;font-size:25px;color:#00eaff;}
+</style>
+</head>
+
+<body>
+
+<nav>
+ <h2>ITZFIZZ</h2>
+ <div>
+  <a href="index.html">Home</a>
+  <a href="project.html">Projects</a>
+  <a href="contact.html">Contact</a>
+ </div>
+</nav>
+
+<header>
+ <div>
+  <h1 id="title">Our Premium Projects</h1>
+  <p id="subtitle">Top-quality web, mobile & branding solutions with world-class performance.</p>
+ </div>
+</header>
+
+<!-- FILTER BUTTONS -->
+<div class="filters">
+ <button class="active" onclick="filter('all')">All</button>
+ <button onclick="filter('web')">Web</button>
+ <button onclick="filter('app')">App</button>
+ <button onclick="filter('brand')">Branding</button>
+</div>
+
+<!-- PROJECT CARDS -->
+<div class="projects">
+
+ <div class="project-card" data-type="web">
+  <h3>⚡ AI Portfolio Website</h3>
+  <p>Next.js • GSAP • Tailwind • Server Actions</p>
+ </div>
+
+ <div class="project-card" data-type="app">
+  <h3>📱 Mobile Banking App</h3>
+  <p>React Native • Secure Auth • Clean UI</p>
+ </div>
+
+ <div class="project-card" data-type="brand">
+  <h3>🎨 Brand Identity System</h3>
+  <p>Logo Kit • Color System • Typography Grid</p>
+ </div>
+
+ <div class="project-card" data-type="web">
+  <h3>🚀 E-Commerce Platform</h3>
+  <p>React • Stripe • Admin Dashboard</p>
+ </div>
+
+ <div class="project-card" data-type="app">
+  <h3>💬 Real-Time Chat App</h3>
+  <p>WebSocket • Push Notifications</p>
+ </div>
+
+ <div class="project-card" data-type="brand">
+  <h3>🖌 Motion Posters</h3>
+  <p>Adobe AE • Graphic Design + Animation</p>
+ </div>
+
+</div>
+
+<!-- CASE STUDIES -->
+<section class="case-studies">
+ <h2>Featured Case Studies</h2>
+
+ <div class="case-box">
+  <h3>📌 E-Commerce Success</h3>
+  <p>Built a scalable platform generating 3× sales using optimized UI, faster load time
+  and conversion-focused design.</p>
+ </div>
+
+ <div class="case-box">
+  <h3>📌 Banking App Modernization</h3>
+  <p>Transformed an outdated mobile app into a modern, secure banking experience.</p>
+ </div>
+
+</section>
+
+<!-- TECH SLIDER -->
+<div class="tech-slider">
+ <h2>Technologies We Use</h2>
+ <div class="tech-logos">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg">
+ </div>
+</div>
+
+<!-- WHY CHOOSE US -->
+<section class="why">
+ <h2>Why Choose ITZFIZZ?</h2>
+ <div class="features">
+
+  <div class="feature-box">
+   <i class="fa-solid fa-rocket"></i>
+   <h3>Fast Delivery</h3>
+   <p>Super-efficient development with optimized workflow.</p>
+  </div>
+
+  <div class="feature-box">
+   <i class="fa-solid fa-award"></i>
+   <h3>Premium Quality</h3>
+   <p>Only top-tier UI/UX and engineering standards.</p>
+  </div>
+
+  <div class="feature-box">
+   <i class="fa-solid fa-headset"></i>
+   <h3>24/7 Support</h3>
+   <p>Your project stays protected and updated.</p>
+  </div>
+
+ </div>
+</section>
+
+<footer>
+ <p>© 2024 ITZFIZZ — All Rights Reserved</p>
+ <div>
+  <i class="fa-brands fa-facebook"></i>
+  <i class="fa-brands fa-instagram"></i>
+  <i class="fa-brands fa-x-twitter"></i>
+ </div>
+</footer>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* Intro Animations */
+gsap.to("#title",{opacity:1,y:-10,duration:1.5});
+gsap.to("#subtitle",{opacity:1,y:-5,duration:1.8,delay:.3});
+
+/* PROJECT CARD Reveal */
+gsap.utils.toArray(".project-card").forEach(card=>{
+ gsap.to(card,{
+   scrollTrigger:{trigger:card,start:"top 85%"},
+   opacity:1,y:0,duration:1.2
+ });
+});
+
+/* CASE STUDIES REVEAL */
+gsap.utils.toArray(".case-box").forEach(box=>{
+ gsap.to(box,{
+   scrollTrigger:{trigger:box,start:"top 85%"},
+   opacity:1,y:0,duration:1.3
+ });
+});
+
+/* FEATURES REVEAL */
+gsap.utils.toArray(".feature-box").forEach(f=>{
+ gsap.to(f,{
+   scrollTrigger:{trigger:f,start:"top 85%"},
+   opacity:1,y:0,duration:1.2
+ });
+});
+
+/* FILTER SYSTEM */
+function filter(type){
+ let cards=document.querySelectorAll(".project-card");
+ document.querySelectorAll(".filters button").forEach(btn=>btn.classList.remove("active"));
+ event.target.classList.add("active");
+
+ cards.forEach(card=>{
+   card.style.display = (type==="all" || card.dataset.type===type) ? "block" : "none";
+ });
+}
+</script>
+
+</body>
+</html>
