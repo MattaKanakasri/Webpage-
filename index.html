@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ITZFIZZ – Ultra Pro Webpage</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{
+ background:linear-gradient(135deg,#05001a,#5500ff,#d100ff,#00eaff);
+ background-size:400%;
+ animation:bgflow 20s infinite alternate ease-in-out;
+ color:white;overflow-x:hidden;
+}
+@keyframes bgflow{
+ 0%{background-position:0 50%;}
+ 50%{background-position:100% 50%;}
+ 100%{background-position:0 50%;}
+}
+
+/* NAVBAR */
+nav{
+ position:fixed;top:0;left:0;width:100%;
+ padding:15px 25px;
+ display:flex;justify-content:space-between;align-items:center;
+ background:rgba(255,255,255,0.08);backdrop-filter:blur(12px);
+ z-index:1000;
+}
+nav a{margin:0 15px;color:cyan;text-decoration:none;font-weight:600;}
+nav h2{color:#00eaff;font-weight:900;letter-spacing:2px;}
+
+/* HERO */
+.hero{
+ height:100vh;display:flex;flex-direction:column;justify-content:center;
+ align-items:center;text-align:center;padding:20px;
+}
+.hero h1{
+ font-size:55px;font-weight:900;letter-spacing:8px;text-shadow:0 0 25px cyan;
+ opacity:0;
+}
+#typewriter{margin-top:10px;font-size:22px;opacity:.8;}
+.hero-btn{
+ margin-top:20px;padding:12px 25px;background:#00eaff;color:#000;
+ border:none;border-radius:30px;font-weight:700;font-size:18px;
+ box-shadow:0 0 20px #00eaff;
+}
+
+/* SECTIONS */
+.section-title{
+ font-size:38px;text-align:center;margin-top:60px;margin-bottom:20px;
+ text-shadow:0 0 20px white;opacity:0;
+}
+
+/* FEATURES */
+.features{
+ display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+ gap:20px;padding:20px;
+}
+.feature-card{
+ background:rgba(255,255,255,0.1);padding:25px;border-radius:18px;
+ backdrop-filter:blur(6px);
+ box-shadow:0 0 18px rgba(255,255,255,0.2);
+ transform:translateY(40px);opacity:0;text-align:center;
+}
+.feature-card i{font-size:50px;margin-bottom:10px;color:#00eaff;}
+
+/* ACHIEVEMENTS */
+.achievements{padding:60px 20px;margin-top:40px;}
+.achieve-wrapper{
+ display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+ gap:25px;margin-top:20px;
+}
+.achieve-card{
+ background:rgba(255,255,255,0.1);padding:30px;border-radius:18px;
+ text-align:center;backdrop-filter:blur(8px);
+ box-shadow:0 0 25px rgba(255,255,255,0.2);
+ opacity:0;transform:translateY(40px);
+}
+.achieve-card i{
+ font-size:45px;color:#00eaff;margin-bottom:10px;text-shadow:0 0 15px #00eaff;
+}
+.achieve-card h3{
+ font-size:40px;font-weight:900;margin:10px 0;color:#fff;
+}
+
+/* PROJECTS (PARALLAX) */
+.projects{
+ padding:40px;margin-top:40px;
+}
+.project-card{
+ background:rgba(255,255,255,0.08);
+ padding:25px;border-radius:20px;
+ margin:20px auto;width:90%;max-width:700px;
+ transform:translateY(80px);opacity:0;
+ backdrop-filter:blur(10px);
+}
+.project-card:hover{
+ transform:scale(1.02);
+ transition:.3s;
+}
+
+/* SERVICES */
+.services{
+ display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+ gap:20px;padding:20px;margin-top:40px;
+}
+.service-card{
+ background:rgba(255,255,255,0.1);
+ padding:25px;border-radius:18px;
+ text-align:center;backdrop-filter:blur(10px);
+ opacity:0;transform:translateY(40px);
+}
+.service-card i{
+ font-size:45px;color:#00eaff;margin-bottom:10px;
+}
+
+/* BLOG SECTION */
+.blog{
+ padding:60px 20px;
+ margin-top:40px;
+ text-align:center;
+}
+.blog-wrapper{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+ gap:25px;
+ margin-top:20px;
+}
+.blog-card{
+ background:rgba(255,255,255,0.08);
+ padding:25px;
+ border-radius:20px;
+ text-align:left;
+ backdrop-filter:blur(10px);
+ opacity:0;
+ transform:translateY(40px);
+}
+.blog-card h3{
+ font-size:20px;
+ margin-bottom:10px;
+ color:#00eaff;
+}
+.blog-card p{
+ font-size:16px;
+ opacity:0.85;
+}
+
+/* TESTIMONIALS */
+.testimonials{margin-top:80px;padding:40px;text-align:center;}
+.test-card{
+ width:85%;max-width:500px;margin:auto;
+ background:rgba(255,255,255,0.08);
+ padding:25px;border-radius:20px;backdrop-filter:blur(10px);
+ box-shadow:0 0 25px rgba(255,255,255,0.12);
+ opacity:0;transform:scale(.8);
+}
+.test-card img{
+ width:70px;height:70px;border-radius:50%;margin-bottom:10px;
+}
+
+/* CONTACT */
+.contact{
+ padding:60px 20px;text-align:center;margin-top:40px;
+}
+.contact input,.contact textarea{
+ width:90%;max-width:500px;padding:15px;margin:10px;
+ border:none;border-radius:15px;font-size:16px;
+}
+.contact button{
+ padding:12px 25px;background:#00eaff;color:#000;
+ font-weight:700;border:none;border-radius:30px;
+}
+
+/* REVIEWS */
+.reviews{
+  padding:60px 20px;
+  margin-top:40px;
+  text-align:center;
+}
+.review-wrapper{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:25px;
+  margin-top:20px;
+}
+.review-card{
+  background:rgba(255,255,255,0.1);
+  padding:25px;
+  border-radius:18px;
+  text-align:center;
+  backdrop-filter:blur(8px);
+  box-shadow:0 0 20px rgba(255,255,255,0.2);
+  opacity:0;
+  transform:translateY(40px);
+}
+.review-card img{
+  width:70px;
+  height:70px;
+  border-radius:50%;
+  margin-bottom:10px;
+}
+.review-card h3{
+  font-size:20px;
+  margin-bottom:5px;
+  color:#fff;
+}
+.review-card p{
+  font-size:16px;
+  opacity:0.85;
+}
+
+/* FOOTER */
+footer{text-align:center;padding:40px;margin-top:60px;
+ background:rgba(255,255,255,0.12);}
+footer i{margin:0 10px;font-size:25px;color:#00eaff;}
+
+/* LOGIN PAGE */
+.login-page{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  background:linear-gradient(135deg,#05001a,#5500ff,#d100ff,#00eaff);
+  background-size:400%;
+  animation:bgflow 20s infinite alternate ease-in-out;
+}
+.login-form{
+  background:rgba(0,0,0,0.6);
+  padding:40px;
+  border-radius:20px;
+  box-shadow:0 0 25px rgba(255,255,255,0.2);
+  width:90%;
+  max-width:400px;
+  text-align:center;
+}
+.login-form h2{
+  margin-bottom:25px;color:#00eaff;text-shadow:0 0 15px cyan;
+}
+.login-form input{
+  width:100%;padding:12px;margin:10px 0;border:none;border-radius:10px;
+}
+.login-form button{
+  width:100%;padding:12px;background:#00eaff;color:#000;
+  font-weight:700;border:none;border-radius:25px;margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav>
+ <h2>ITZFIZZ</h2>
+ <div>
+  <a href="#">Home</a>
+  <a href="#projects">Projects</a>
+  <a href="#services">Services</a>
+  <a href="#blog">Blog</a>
+  <a href="#contact">Contact</a>
+ </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+ <h1 id="headline">WELCOME TO ITZFIZZ</h1>
+ <div id="typewriter"></div>
+ <button class="hero-btn">Explore Now</button>
+</section>
+
+<!-- FEATURES -->
+<h2 class="section-title">🔥 Powerful Features</h2>
+<div class="features">
+ <div class="feature-card"><i class="fa-solid fa-bolt"></i> Lightning Fast Animations</div>
+ <div class="feature-card"><i class="fa-solid fa-robot"></i> AI Enhanced UI/UX</div>
+ <div class="feature-card"><i class="fa-solid fa-wand-magic-sparkles"></i> Cinematic VFX</div>
+ <div class="feature-card"><i class="fa-solid fa-mobile-screen"></i> 100% Mobile Friendly</div>
+</div>
+
+<!-- ACHIEVEMENTS -->
+<section class="achievements">
+ <h2 class="section-title">🏆 Achievements</h2>
+ <div class="achieve-wrapper">
+  <div class="achieve-card"><i class="fa-solid fa-ranking-star"></i><h3 class="count" data-target="6">0</h3><p>Years Experience</p></div>
+  <div class="achieve-card"><i class="fa-solid fa-layer-group"></i><h3 class="count" data-target="120">0</h3><p>Projects Done</p></div>
+  <div class="achieve-card"><i class="fa-solid fa-users"></i><h3 class="count" data-target="80">0</h3><p>Happy Clients</p></div>
+  <div class="achieve-card"><i class="fa-solid fa-award"></i><h3 class="count" data-target="14">0</h3><p>Awards Won</p></div>
+ </div>
+</section>
+
+<!-- PROJECTS -->
+<h2 class="section-title" id="projects">🚀 Featured Projects</h2>
+<div class="projects">
+ <div class="project-card"><h3>⚡ AI Portfolio Website</h3><p>Next.js • GSAP • Tailwind • Ultra smooth animations.</p></div>
+ <div class="project-card"><h3>📱 Mobile App UI</h3><p>Figma + React Native modern UI/UX.</p></div>
+ <div class="project-card"><h3>🎨 Branding Design</h3><p>Logos • Posters • Digital Identity Systems</p></div>
+</div>
+
+<!-- SERVICES -->
+<h2 class="section-title" id="services">💼 Services</h2>
+<div class="services">
+ <div class="service-card"><i class="fa-solid fa-code"></i><h3>Web Development</h3><p>Fully responsive modern websites.</p></div>
+ <div class="service-card"><i class="fa-solid fa-bezier-curve"></i><h3>Graphic Design</h3><p>Logos, banners, UI kits.</p></div>
+ <div class="service-card"><i class="fa-solid fa-rocket"></i><h3>Brand Identity</h3><p>Complete branding solutions.</p></div>
+ <div class="service-card"><i class="fa-solid fa-chart-line"></i><h3>SEO Optimization</h3><p>Boost your site traffic and performance.</p></div>
+ <div class="service-card"><i class="fa-solid fa-shield-halved"></i><h3>Security Services</h3><p>Secure your website & user data professionally.</p></div>
+</div>
+
+<!-- BLOG SECTION -->
+<h2 class="section-title" id="blog">📝 Latest Blog</h2>
+<div class="blog">
+  <div class="blog-wrapper">
+    <div class="blog-card">
+      <h3>Top 5 Web Animations for 2026</h3>
+      <p>Learn how to use GSAP, Lottie, and CSS animations for modern websites.</p>
+    </div>
+    <div class="blog-card">
+      <h3>AI in UI/UX Design</h3>
+      <p>Explore how AI enhances user experience and interface design.</p>
+    </div>
+    <div class="blog-card">
+      <h3>Responsive Design Trends</h3>
+      <p>Discover the latest approaches to mobile-first and flexible layouts.</p>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+ <h2 class="section-title">🌟 Testimonials</h2>
+ <div class="test-card"><img src="https://i.pravatar.cc/150?img=12"><h3>John Doe</h3><p>Fantastic website! Amazing animations!</p></div><br><br>
+ <div class="test-card"><img src="https://i.pravatar.cc/150?img=17"><h3>Maria Smith</h3><p>Premium quality & professional work!</p></div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews">
+  <h2 class="section-title">💬 Customer Reviews</h2>
+  <div class="review-wrapper">
+    <div class="review-card">
+      <img src="https://i.pravatar.cc/150?img=32" alt="Alice">
+      <h3>Alice Johnson</h3>
+      <p>"Exceptional work! My website looks stunning and runs flawlessly."</p>
+    </div>
+    <div class="review-card">
+      <img src="https://i.pravatar.cc/150?img=44" alt="Michael">
+      <h3>Michael Lee</h3>
+      <p>"Professional, fast, and creative — highly recommended!"</p>
+    </div>
+    <div class="review-card">
+      <img src="https://i.pravatar.cc/150?img=56" alt="Sophia">
+      <h3>Sophia Brown</h3>
+      <p>"Amazing animations and responsive design. Very satisfied!"</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+ <h2 class="section-title">📨 Contact Me</h2>
+ <input type="text" placeholder="Your Name">
+ <input type="email" placeholder="Your Email">
+ <textarea rows="4" placeholder="Message"></textarea><br>
+ <button>Send Message</button>
+</section>
+
+<!-- FOOTER -->
+<footer>
+ <p>© 2024 ITZFIZZ — All Rights Reserved</p>
+ <div>
+   <i class="fa-brands fa-facebook"></i>
+   <i class="fa-brands fa-instagram"></i>
+   <i class="fa-brands fa-x-twitter"></i>
+ </div>
+</footer>
+
+<!-- LOGIN PAGE -->
+<section class="login-page" id="login-page" style="display:none;">
+  <div class="login-form">
+    <h2>Login to ITZFIZZ</h2>
+    <input type="text" placeholder="Username">
+    <input type="password" placeholder="Password">
+    <button>Login</button>
+  </div>
+</section>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* HERO TEXT */
+gsap.to("#headline",{opacity:1,y:-20,duration:1.5});
+
+/* TYPEWRITER */
+let txt="Modern Web Animations & Professional UI Experience";
+let i=0;function type(){ if(i<txt.length){document.getElementById("typewriter").innerHTML+=txt.charAt(i);i++;setTimeout(type,40);} } type();
+
+/* SECTION TITLES */
+gsap.utils.toArray(".section-title").forEach((t)=>{
+ gsap.to(t,{scrollTrigger:{trigger:t,start:"top 85%"},opacity:1,y:-10,duration:1.2});
+});
+
+/* CARDS */
+gsap.utils.toArray(".feature-card, .service-card, .project-card, .blog-card").forEach((card)=>{
+ gsap.to(card,{scrollTrigger:{trigger:card,start:"top 85%"},opacity:1,y:0,duration:1.3});
+});
+
+/* TESTIMONIALS */
+gsap.utils.toArray(".test-card").forEach((card)=>{
+ gsap.to(card,{scrollTrigger:{trigger:card,start:"top 85%"},opacity:1,scale:1,duration:1.2});
+});
+
+/* ACHIEVEMENTS */
+gsap.utils.toArray(".achieve-card").forEach((card)=>{
+ gsap.to(card,{scrollTrigger:{trigger:card,start:"top 85%"},opacity:1,y:0,duration:1.5});
+});
+
+/* REVIEWS */
+gsap.utils.toArray(".review-card").forEach((card)=>{
+  gsap.to(card,{scrollTrigger:{trigger:card,start:"top 85%"},opacity:1,y:0,duration:1.3});
+});
+
+/* COUNTER ANIMATION */
+const counters=document.querySelectorAll('.count');
+counters.forEach(counter=>{
+ let started=false;
+ ScrollTrigger.create({trigger: counter,
+   start:"top 90%",
+   onEnter:()=>{
+     if(!started){
+       started=true;
+       let target=+counter.getAttribute("data-target");
+       let count=0;
+       let inc=target/80;
+       let update=setInterval(()=>{
+         count+=inc;
+         if(count>=target){
+           counter.innerText=target;
+           clearInterval(update);
+         } else {
+           counter.innerText=Math.floor(count);
+         }
+       },20);
+     }
+   }
+ });
+});
+
+/* OPTIONAL: Simple Login Toggle Example */
+document.querySelector(".hero-btn").addEventListener("click",()=>{
+ document.querySelector("#login-page").style.display="flex";
+ window.scrollTo(0,0);
+});
+</script>
+
+</body>
+</html>
