@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Blog – ITZFIZZ</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{
+ background:linear-gradient(135deg,#05001a,#4800ff,#d100ff,#00eaff,#1500ff);
+ background-size:500%;animation:bgflow 20s infinite alternate ease-in-out;
+ color:white;overflow-x:hidden;
+}
+@keyframes bgflow{0%{background-position:0 50%;}50%{background-position:100% 50%;}100%{background-position:0 50%;}}
+
+nav{position:fixed;top:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:15px 25px;background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);z-index:999;}
+nav a{color:cyan;margin:0 15px;text-decoration:none;font-weight:600;}
+nav h2{color:#00eaff;font-size:25px;font-weight:900;}
+
+header{height:35vh;display:flex;justify-content:center;align-items:center;text-align:center;padding-top:80px;}
+header h1{font-size:45px;font-weight:900;text-shadow:0 0 20px cyan;opacity:0;transform:scale(0.8);}
+header p{opacity:0;margin-top:10px;font-size:18px;}
+
+.section-title{font-size:38px;text-align:center;margin:60px 0 30px 0;text-shadow:0 0 20px white;opacity:0;}
+
+.blog-section{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:25px;padding:20px 40px;}
+.blog-card{background:rgba(255,255,255,0.08);border-radius:18px;overflow:hidden;backdrop-filter:blur(12px);box-shadow:0 0 25px rgba(255,255,255,0.1);opacity:0;transform:translateY(40px);transition:.3s;}
+.blog-card img{width:100%;height:180px;object-fit:cover;}
+.blog-card .content{padding:20px;}
+.blog-card h3{color:#00eaff;margin-bottom:10px;}
+.blog-card p{opacity:.85;line-height:1.5;}
+.blog-card span{font-weight:600;color:#00eaff;font-size:14px;}
+
+footer{padding:40px;text-align:center;margin-top:50px;background:rgba(255,255,255,0.12);}
+footer i{margin:0 12px;font-size:25px;color:#00eaff;}
+</style>
+</head>
+
+<body>
+
+<nav>
+ <h2>ITZFIZZ</h2>
+ <div>
+   <a href="index.html">Home</a>
+   <a href="projects.html">Projects</a>
+   <a href="about.html">About</a>
+   <a href="service.html">Services</a>
+   <a href="career.html">Careers</a>
+   <a href="blog.html">Blog</a>
+   <a href="contact.html">Contact</a>
+ </div>
+</nav>
+
+<header>
+ <h1 id="title">Our Blog</h1>
+ <p id="subtitle">Insights, news, and tips on web development, design & AI integration.</p>
+</header>
+
+<h2 class="section-title">Latest Posts</h2>
+<section class="blog-section">
+
+ <div class="blog-card">
+   <img src="https://i.pravatar.cc/400?img=21" alt="Blog Image">
+   <div class="content">
+     <h3>🚀 Boosting Web Performance in 2026</h3>
+     <p>Learn how to make your React and Next.js apps lightning fast using modern tools and optimizations.</p>
+     <span>March 2026 | Web Development</span>
+   </div>
+ </div>
+
+ <div class="blog-card">
+   <img src="https://i.pravatar.cc/400?img=22" alt="Blog Image">
+   <div class="content">
+     <h3>🎨 UI/UX Design Trends for Digital Products</h3>
+     <p>Discover the latest trends in interface design, motion graphics, and user experience strategies.</p>
+     <span>February 2026 | Design</span>
+   </div>
+ </div>
+
+ <div class="blog-card">
+   <img src="https://i.pravatar.cc/400?img=23" alt="Blog Image">
+   <div class="content">
+     <h3>🤖 AI Integration in Modern Apps</h3>
+     <p>Step-by-step guide on implementing AI features and automations to enhance user engagement.</p>
+     <span>January 2026 | AI & Automation</span>
+   </div>
+ </div>
+
+ <div class="blog-card">
+   <img src="https://i.pravatar.cc/400?img=24" alt="Blog Image">
+   <div class="content">
+     <h3>📱 Building Smooth Mobile Experiences</h3>
+     <p>Tips for creating fast, beautiful, and responsive mobile apps on iOS and Android platforms.</p>
+     <span>December 2025 | App Development</span>
+   </div>
+ </div>
+
+</section>
+
+<footer>
+ <p>© 2026 ITZFIZZ — All Rights Reserved</p>
+ <div><i class="fa-brands fa-facebook"></i><i class="fa-brands fa-instagram"></i><i class="fa-brands fa-x-twitter"></i></div>
+</footer>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* Top Header Animation */
+gsap.fromTo("#title",{opacity:0,scale:0.8},{opacity:1,scale:1,duration:1.5,ease:"back.out(1.7)"});
+gsap.fromTo("#subtitle",{opacity:0,x:-30},{opacity:1,x:0,duration:1.2,delay:0.3});
+
+/* Section Titles */
+gsap.utils.toArray(".section-title").forEach(title=>{
+ gsap.to(title,{scrollTrigger:{trigger:title,start:"top 85%"},opacity:1,y:-10,duration:1.2});
+});
+
+/* Blog Cards */
+gsap.utils.toArray(".blog-card").forEach(card=>{
+ gsap.to(card,{scrollTrigger:{trigger:card,start:"top 85%"},opacity:1,y:0,duration:1.2});
+});
+</script>
+
+</body>
+</html>
